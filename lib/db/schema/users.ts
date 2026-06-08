@@ -7,6 +7,7 @@ export const users = pgTable("users", {
   // email: varchar().notNull().unique(),
   // password_hash: varchar().notNull(),
   course: varchar({ length: 20 }).notNull(),
+  semester: integer().notNull(),
   // currentStack: varchar({ length: 20 }).array().notNull(),
   bio: text().notNull(),
 });

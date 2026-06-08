@@ -1,5 +1,5 @@
 {
-  "id": "f7535a48-8133-4222-bcbb-555c29edd291",
+  "id": "aea528aa-8b18-4c1e-acfc-a754612c7985",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -37,6 +37,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "semester": {
+          "name": "semester",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
         "bio": {
           "name": "bio",
           "type": "text",
@@ -51,7 +57,9 @@
         "users_username_unique": {
           "name": "users_username_unique",
           "nullsNotDistinct": false,
-          "columns": ["username"]
+          "columns": [
+            "username"
+          ]
         }
       },
       "policies": {},

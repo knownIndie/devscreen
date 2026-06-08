@@ -11,8 +11,8 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is not set");
 }
 export default defineConfig({
-  schema: "./app/db/schema/*.ts",
-  out: "./db/migrations",
+  schema: "./lib/db/schema/*.ts",
+  out: "./lib/db/migrations",
   dialect: "postgresql",
   dbCredentials: {
     url: connectionString,
