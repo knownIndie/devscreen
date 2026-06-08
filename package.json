@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "ld": "biome check --write && next dev",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "biome check",
-    "format": "biome format --write"
+    "format": "biome check --write",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
     "@ai-sdk/google": "^3.0.80",
@@ -29,6 +34,7 @@
     "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
     "drizzle-kit": "^0.31.10",
+    "kontxt-cli": "^0.1.1",
     "tailwindcss": "^4.3.0",
     "typescript": "^5.9.3"
   }
