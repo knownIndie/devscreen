@@ -1,6 +1,6 @@
 {
-  "id": "fdc49e9c-b2be-4c91-a851-92c9920b7505",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "e5dfa470-9b84-470e-aae8-6ec626ba45b5",
+  "prevId": "fdc49e9c-b2be-4c91-a851-92c9920b7505",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -347,8 +347,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.users": {
-      "name": "users",
+    "public.userinterview": {
+      "name": "userinterview",
       "schema": "",
       "columns": {
         "id": {
@@ -358,7 +358,7 @@
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "users_id_seq",
+            "name": "userinterview_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -397,8 +397,8 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_username_unique": {
-          "name": "users_username_unique",
+        "userinterview_username_unique": {
+          "name": "userinterview_username_unique",
           "nullsNotDistinct": false,
           "columns": ["username"]
         }

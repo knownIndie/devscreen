@@ -1,7 +1,7 @@
 // schema.ts
 import { integer, pgTable, text, varchar } from "drizzle-orm/pg-core";
 
-export const users = pgTable("users", {
+export const userinterview = pgTable("userinterview", {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   username: varchar({ length: 20 }).notNull().unique(),
   // email: varchar().notNull().unique(),
