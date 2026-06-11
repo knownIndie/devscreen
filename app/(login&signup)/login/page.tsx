@@ -1,18 +1,12 @@
 "use client";
-
-import { authClient } from "@/lib/auth/auth-client";
+import { signinFunction } from "@/app/actions/action";
 
 export default function LoginPage() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <button
         type="button"
-        onClick={() =>
-          authClient.signIn.social({
-            provider: "google",
-            callbackURL: "/",
-          })
-        }
+        onClick={signinFunction}
         className="flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-medium transition-colors hover:bg-zinc-100 dark:hover:bg-zinc-800"
       >
         <GoogleIcon />
