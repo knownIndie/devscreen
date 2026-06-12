@@ -1,7 +1,38 @@
 import { relations } from "drizzle-orm";
-import { boolean, index, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  index,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
+// dev screen user profile schema start
+export const profiles = pgTable("profiles", {
+  // represents a user profile in the database with our custom fields for devscreen application
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  authId: text("auth_id")
+    .notNull()
+    .unique()
+    .references(() => user.id, {
+      onDelete: "cascade",
+    }),
+  username: text("username").notNull(),
+  email: text("email").notNull(),
+  course: varchar({ length: 20 }),
+  semester: integer(),
+  // currentStack: varchar({ length: 20 }).array().notNull(),
+  bio: text(),
+  onboardingCompleted: boolean().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+// dev screen user profile schema end
+
+// Better auth schema start
 export const user = pgTable("user", {
+  // represents a user in the database with better-auth
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull().unique(),
@@ -15,6 +46,7 @@ export const user = pgTable("user", {
 });
 
 export const session = pgTable(
+  // represenst A login session
   "session",
   {
     id: text("id").primaryKey(),
@@ -91,3 +123,4 @@ export const accountRelations = relations(account, ({ one }) => ({
     references: [user.id],
   }),
 }));
+// Better auth schema end
