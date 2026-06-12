@@ -1,5 +1,5 @@
 "use client";
-import { signinFunction } from "@/app/actions/action";
+import { signinFunction } from "@/app/actions/hooks";
 
 export default function LoginPage() {
   return (

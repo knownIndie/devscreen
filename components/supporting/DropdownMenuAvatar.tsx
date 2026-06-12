@@ -17,7 +17,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth/auth-client";
-import { signinFunction, signoutFunction } from "@/app/actions/action";
+import { signinFunction, signoutFunction } from "@/app/actions/hooks";
 
 export function DropdownMenuAvatar() {
   const { data: session } = authClient.useSession();
