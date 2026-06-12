@@ -6,4 +6,7 @@ export const signinFunction = () =>
     callbackURL: "/",
   });
 
-export const signoutFunction = () => authClient.signOut();
+export const signoutFunction = () =>
+  authClient.signOut({
+    callbackURL: "/",
+  });

@@ -1,10 +1,9 @@
 "use client";
 
 import {
-  RiBankCardLine,
+  RiLoginBoxLine,
   RiLogoutBoxRLine,
-  RiNotificationLine,
-  RiVerifiedBadgeFill,
+  RiUser3Line,
 } from "@remixicon/react";
 import Image from "next/image";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -18,11 +17,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { authClient } from "@/lib/auth/auth-client";
+import { signinFunction, signoutFunction } from "@/app/actions/action";
 
 export function DropdownMenuAvatar() {
   const { data: session } = authClient.useSession();
   return (
-    <DropdownMenu>
+    <DropdownMenu >
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
@@ -43,25 +43,29 @@ export function DropdownMenuAvatar() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <RiVerifiedBadgeFill />
-            Account
+        {session ? (
+          <>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <RiUser3Line />
+                Profile
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              variant="destructive"
+              onClick={() => signoutFunction()}
+            >
+              <RiLogoutBoxRLine />
+              Sign Out
+            </DropdownMenuItem>
+          </>
+        ) : (
+          <DropdownMenuItem onClick={() => signinFunction()}>
+            <RiLoginBoxLine />
+            Sign In
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <RiBankCardLine />
-            Billing
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <RiNotificationLine />
-            Notifications
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <RiLogoutBoxRLine />
-          Sign Out
-        </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
