@@ -24,20 +24,19 @@ export const auth = betterAuth({
     user: {
       create: {
         after: async (user) => {
-          console.log("inside database hooks");
+          console.log("\ninside database hooks");
           //perform actions after login
           const existUserProfile = await db.query.profiles.findFirst({
             where: eq(profiles.authId, user.id),
           });
-          console.log("existUserProfile", existUserProfile);
           if (!existUserProfile) {
-            console.log("CREATING PROFILE FOR USER", user.email);
+            console.log("\nCREATING PROFILE FOR USER", user.email);
             await db.insert(profiles).values({
               authId: user.id,
               username: user.name,
               email: user.email,
             });
-            console.log("PROFILE CREATED FOR USER", user.email);
+            console.log("\nPROFILE CREATED FOR USER", user.email);
           }
         },
       },

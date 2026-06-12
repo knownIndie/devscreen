@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { authClient } from "@/lib/auth/auth-client";
+import { ModeToggle } from "../ui/modetoggle";
 
 export default function homepage() {
   const { data: session } = authClient.useSession();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6">
+      <ModeToggle />
       {session ? (
         <>
           <p className="text-lg">
