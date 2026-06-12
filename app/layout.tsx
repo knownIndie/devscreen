@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import ThemeProvider from "@/components/provider/theme-provider";
 import {
   Geist,
   Geist_Mono,
@@ -7,6 +6,8 @@ import {
   Lora,
   Noto_Sans,
 } from "next/font/google";
+import Navbar from "@/components/essential/navbar";
+import ThemeProvider from "@/components/provider/theme-provider";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -61,6 +62,7 @@ export default function RootLayout({
           enableSystem
           // disableTransitionOnChange
         >
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>

@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { authClient } from "@/lib/auth/auth-client";
+import { DropdownMenuAvatar } from "../supporting/DropdownMenuAvatar";
 import { ModeToggle } from "../ui/modetoggle";
 
 export default function homepage() {
@@ -31,6 +33,16 @@ export default function homepage() {
           </Link>
         </>
       )}
+      {session?.user?.image ? (
+        <Image
+          src={session.user.image}
+          alt="User avatar"
+          width={48}
+          height={48}
+          className="rounded-full"
+        />
+      ) : null}
+      <DropdownMenuAvatar />
     </div>
   );
 }
