@@ -21,11 +21,11 @@ export const profiles = pgTable("profiles", {
     }),
   username: text("username").notNull(),
   email: text("email").notNull(),
-  course: varchar({ length: 20 }),
+  course: text(),
   semester: integer(),
   // currentStack: varchar({ length: 20 }).array().notNull(),
   bio: text(),
-  onboardingCompleted: boolean().default(false),
+  onboardingCompleted: boolean("onboarding_completed").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 // dev screen user profile schema end

@@ -1,11 +1,17 @@
 "use client";
 
 import {
+  RiAccountCircleLine,
   RiLoginBoxLine,
   RiLogoutBoxRLine,
   RiUser3Line,
 } from "@remixicon/react";
 import Image from "next/image";
+import {
+  signinFunction,
+  signoutFunction,
+  useSession,
+} from "@/app/actions/hooks";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,19 +22,17 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { authClient } from "@/lib/auth/auth-client";
-import { signinFunction, signoutFunction } from "@/app/actions/hooks";
 
 export function DropdownMenuAvatar() {
-  const { data: session } = authClient.useSession();
+  const { user, isSignedIn } = useSession();
   return (
-    <DropdownMenu >
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="rounded-full">
           <Avatar>
-            {session?.user?.image ? (
+            {user?.image ? (
               <Image
-                src={session.user.image}
+                src={user.image}
                 alt="User avatar"
                 width={48}
                 height={48}
@@ -36,22 +40,32 @@ export function DropdownMenuAvatar() {
               />
             ) : (
               <AvatarFallback>
-                {session?.user?.name?.charAt(0)?.toUpperCase() ?? "?"}
+                {user?.name ? (
+                  user.name.charAt(0).toUpperCase()
+                ) : (
+                  <RiAccountCircleLine />
+                )}
               </AvatarFallback>
             )}
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        {session ? (
+        {isSignedIn ? (
           <>
+            <DropdownMenuItem>
+              <span className="font-medium">
+                {user?.name ? user.name : "User"}
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <RiUser3Line />
                 Profile
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
+            {/*<DropdownMenuSeparator />*/}
             <DropdownMenuItem
               variant="destructive"
               onClick={() => signoutFunction()}

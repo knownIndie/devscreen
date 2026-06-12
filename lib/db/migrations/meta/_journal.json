@@ -8,6 +8,13 @@
       "when": 1781236417497,
       "tag": "0000_short_punisher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1781280360350,
+      "tag": "0001_giant_skrulls",
+      "breakpoints": true
     }
   ]
 }

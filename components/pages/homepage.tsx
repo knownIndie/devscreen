@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { authClient } from "@/lib/auth/auth-client";
 import { useSession } from "@/app/actions/hooks";
+import { authClient } from "@/lib/auth/auth-client";
 
 export default function homepage() {
   const { session, isSignedIn } = useSession();
