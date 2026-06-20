@@ -1,8 +1,8 @@
 "use client";
-
+import { useRouter } from "next/navigation";
 import {
   RiAccountCircleLine,
-  RiLoginBoxLine,
+  RiGoogleFill,
   RiLogoutBoxRLine,
   RiUser3Line,
 } from "@remixicon/react";
@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function DropdownMenuAvatar() {
+  const router = useRouter();
   const { user, isSignedIn } = useSession();
   return (
     <DropdownMenu>
@@ -68,7 +69,7 @@ export function DropdownMenuAvatar() {
             {/*<DropdownMenuSeparator />*/}
             <DropdownMenuItem
               variant="destructive"
-              onClick={() => signoutFunction()}
+              onClick={() => signoutFunction(router)}
             >
               <RiLogoutBoxRLine />
               Sign Out
@@ -76,7 +77,7 @@ export function DropdownMenuAvatar() {
           </>
         ) : (
           <DropdownMenuItem onClick={() => signinFunction()}>
-            <RiLoginBoxLine />
+            <RiGoogleFill />
             Sign In
           </DropdownMenuItem>
         )}

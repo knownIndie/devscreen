@@ -3,13 +3,18 @@ import { authClient } from "@/lib/auth/auth-client";
 export const signinFunction = () =>
   authClient.signIn.social({
     provider: "google",
-    callbackURL: "/",
+    callbackURL: "/onboarding",
   });
 
-export const signoutFunction = () =>
-  authClient.signOut({
-    callbackURL: "/",
+export const signoutFunction = async (router: ReturnType<typeof useRouter>) => {
+  await authClient.signOut({
+    fetchOptions: {
+      onSuccess: () => {
+        router.replace("/");
+      },
+    },
   });
+};
 
 export function useSession() {
   const { data: session, error, isPending } = authClient.useSession();
