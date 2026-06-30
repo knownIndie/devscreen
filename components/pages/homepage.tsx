@@ -1,9 +1,9 @@
-import Link from "next/link";
-import { useSession } from "@/app/actions/hooks";
-import { authClient } from "@/lib/auth/auth-client";
+// import Link from "next/link";
+// import { useSession } from "@/app/actions/hooks";
+// import { authClient } from "@/lib/auth/auth-client";
 
 export default function homepage() {
-  const { session, isSignedIn } = useSession();
+  // const { session, isSignedIn } = useSession();
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-6">
       <h1 className="text-2xl font-bold">homepage</h1>

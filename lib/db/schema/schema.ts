@@ -6,7 +6,6 @@ import {
   pgTable,
   text,
   timestamp,
-  varchar,
 } from "drizzle-orm/pg-core";
 
 // dev screen user profile schema start
