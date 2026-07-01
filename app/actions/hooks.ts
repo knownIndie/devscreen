@@ -1,3 +1,6 @@
+"use client";
+
+import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth/auth-client";
 
 export const signinFunction = () =>
@@ -6,15 +9,13 @@ export const signinFunction = () =>
     callbackURL: "/onboarding",
   });
 
-export const signoutFunction = async (router: ReturnType<typeof useRouter>) => {
-  await authClient.signOut({
-    fetchOptions: {
-      onSuccess: () => {
-        router.replace("/");
-      },
-    },
-  });
-};
+export function useSignOut() {
+  const router = useRouter();
+  return async function signOut() {
+    await authClient.signOut();
+    router.replace("/");
+  };
+}
 
 export function useSession() {
   const { data: session, error, isPending } = authClient.useSession();

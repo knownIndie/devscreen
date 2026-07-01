@@ -32,8 +32,10 @@ Google Sheets is an editorial source, not the runtime application database.
 
 ## Development plan
 
-The complete learning-first implementation roadmap, data model, Sheet contract,
-acceptance checks, and post-MVP GitHub/RAG plan are in [PLAN.md](./PLAN.md).
+The product architecture, data relationships, selection rules, synchronization
+design, and evaluation boundaries are in [ARCHITECTURE.md](./ARCHITECTURE.md).
+
+The stage-by-stage implementation checklist is in [PLAN.md](./PLAN.md).
 
 The locked product decisions and fresh-conversation restart scripts are in
 [CONVERSATION_CONTEXT.md](./CONVERSATION_CONTEXT.md).

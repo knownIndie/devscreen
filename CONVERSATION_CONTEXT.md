@@ -8,11 +8,13 @@ decisions made before implementation.
 Read this file together with:
 
 - `README.md`
+- `ARCHITECTURE.md`
 - `PLAN.md`
 - `AGENTS.md`, if present
 
-`PLAN.md` is the implementation roadmap. This file records the reasoning style,
-locked decisions, unresolved decisions, and the script for continuing.
+`ARCHITECTURE.md` contains the system design and locked technical behavior.
+`PLAN.md` is the implementation checklist. This file records the reasoning
+style, decision history, unresolved decisions, and the script for continuing.
 
 ## Collaboration agreement
 
@@ -425,17 +427,17 @@ After Phase 0 passes, begin the profile and onboarding schema discussion.
 Paste this into a new conversation:
 
 ```text
-Read AGENTS.md, README.md, PLAN.md, and CONVERSATION_CONTEXT.md in this
-repository before responding.
+Read AGENTS.md, README.md, ARCHITECTURE.md, PLAN.md, and
+CONVERSATION_CONTEXT.md in this repository before responding.
 
 I am building DevScreen myself to learn full-stack product engineering. Treat
 me as a junior engineer working with a senior engineer. Do not dumb down the
 architecture and do not write implementation code unless I explicitly ask.
 
-Treat the decisions in CONVERSATION_CONTEXT.md as locked unless I reopen one.
-Call out contradictions directly. Ask me to make product decisions when there
-are multiple valid behaviors. Explain relationships, invariants, queries,
-failure cases, and tradeoffs.
+Treat the decisions in ARCHITECTURE.md and CONVERSATION_CONTEXT.md as locked
+unless I reopen one. Call out contradictions directly. Ask me to make product
+decisions when there are multiple valid behaviors. Explain relationships,
+invariants, queries, failure cases, and tradeoffs.
 
 First, summarize the current milestone and the locked decisions relevant to it.
 Then guide me through Phase 0 one checkpoint at a time. Ask me to explain what I
@@ -447,8 +449,8 @@ understand before moving to the next checkpoint.
 When the user has implemented a phase, use:
 
 ```text
-Read PLAN.md and CONVERSATION_CONTEXT.md, then review my current implementation
-against the active phase acceptance checks.
+Read ARCHITECTURE.md, PLAN.md, and CONVERSATION_CONTEXT.md, then review my
+current implementation against the active phase acceptance checks.
 
 Do not rewrite the implementation immediately. First identify correctness,
 authorization, data-integrity, and maintainability problems. Ask me to explain

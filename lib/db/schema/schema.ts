@@ -4,6 +4,7 @@ import {
   index,
   integer,
   pgTable,
+  primaryKey,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
@@ -11,10 +12,8 @@ import {
 // dev screen user profile schema start
 export const profiles = pgTable("profiles", {
   // represents a user profile in the database with our custom fields for devscreen application
-  id: integer().primaryKey().generatedAlwaysAsIdentity(),
-  authId: text("auth_id")
-    .notNull()
-    .unique()
+  profileId: text("profile_id")
+    .primaryKey()
     .references(() => user.id, {
       onDelete: "cascade",
     }),
@@ -22,13 +21,51 @@ export const profiles = pgTable("profiles", {
   email: text("email").notNull(),
   course: text(),
   semester: integer(),
-  // currentStack: varchar({ length: 20 }).array().notNull(),
   bio: text(),
   onboardingCompleted: boolean("onboarding_completed").default(false),
   createdAt: timestamp("created_at").defaultNow().notNull(),
+  // new upadtes
+  experienceLevel: text("experience_level"),
 });
 // dev screen user profile schema end
 
+// devscreen technologies schema start
+// this contains the list of technologies
+export const technologies = pgTable("technologies", {
+  techId: integer("tech_id").primaryKey().generatedAlwaysAsIdentity(),
+  name: text("name").notNull(),
+});
+// devscreen technologies schema end
+
+// devscreen profileTechnologies schema start
+// this contains the list of technologies associated with a profile, this is a many-to-many relationship between profiles and technologies
+
+export const profileTechnologies = pgTable(
+  "profile_technologies",
+  {
+    profileId: text("profile_id").references(() => profiles.profileId, {
+      onDelete: "cascade",
+    }),
+    techId: integer("tech_id")
+      .notNull()
+      .references(() => technologies.techId, {
+        onDelete: "cascade",
+      }),
+  },
+  (table) => [
+    primaryKey({
+      columns: [table.profileId, table.techId],
+    }),
+  ],
+);
+// end of profileTechnologies schema
+
+// start of domains schema
+export const domains = pgTable("domains", {
+  domainId: integer("domain_id").primaryKey().generatedAlwaysAsIdentity(),
+  name: text("name").notNull(),
+});
+// end of domains schema
 // Better auth schema start
 export const user = pgTable("user", {
   // represents a user in the database with better-auth

@@ -6,12 +6,7 @@ import {
   RiUser3Line,
 } from "@remixicon/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import {
-  signinFunction,
-  signoutFunction,
-  useSession,
-} from "@/app/actions/hooks";
+import { signinFunction, useSession, useSignOut } from "@/app/actions/hooks";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,8 +19,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 export function DropdownMenuAvatar() {
-  const router = useRouter();
+  const signOut = useSignOut();
   const { user, isSignedIn } = useSession();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -67,10 +63,7 @@ export function DropdownMenuAvatar() {
               </DropdownMenuItem>
             </DropdownMenuGroup>
             {/*<DropdownMenuSeparator />*/}
-            <DropdownMenuItem
-              variant="destructive"
-              onClick={() => signoutFunction(router)}
-            >
+            <DropdownMenuItem variant="destructive" onClick={signOut}>
               <RiLogoutBoxRLine />
               Sign Out
             </DropdownMenuItem>
