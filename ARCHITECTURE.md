@@ -46,13 +46,11 @@ The profile stores:
 `userId` is both the profile primary key and a foreign key to Better Auth's
 `user.id`.
 
-Do not duplicate Better Auth's name, email, or image in the profile unless the
-product later introduces a separate public identity.
 
 `onboardingCompleted` remains a boolean for the MVP. A completion timestamp can
 replace it later.
 
-Resume upload is deferred.
+>Resume upload is deferred.
 
 ### Google Sheets owns editorial input
 

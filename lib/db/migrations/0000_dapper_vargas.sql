@@ -14,17 +14,27 @@ CREATE TABLE "account" (
 	"updated_at" timestamp NOT NULL
 );
 --> statement-breakpoint
+CREATE TABLE "domains" (
+	"domain_id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "domains_domain_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"name" text NOT NULL
+);
+--> statement-breakpoint
+CREATE TABLE "profile_technologies" (
+	"profile_id" text,
+	"tech_id" integer NOT NULL,
+	CONSTRAINT "profile_technologies_profile_id_tech_id_pk" PRIMARY KEY("profile_id","tech_id")
+);
+--> statement-breakpoint
 CREATE TABLE "profiles" (
-	"id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "profiles_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
-	"auth_id" text NOT NULL,
+	"profile_id" text PRIMARY KEY NOT NULL,
 	"username" text NOT NULL,
 	"email" text NOT NULL,
-	"course" varchar(20),
+	"course" text,
 	"semester" integer,
 	"bio" text,
-	"onboardingCompleted" boolean DEFAULT false,
+	"onboarding_completed" boolean DEFAULT false,
 	"created_at" timestamp DEFAULT now() NOT NULL,
-	CONSTRAINT "profiles_auth_id_unique" UNIQUE("auth_id")
+	"experience_level" text
 );
 --> statement-breakpoint
 CREATE TABLE "session" (
@@ -37,6 +47,11 @@ CREATE TABLE "session" (
 	"user_agent" text,
 	"user_id" text NOT NULL,
 	CONSTRAINT "session_token_unique" UNIQUE("token")
+);
+--> statement-breakpoint
+CREATE TABLE "technologies" (
+	"tech_id" integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY (sequence name "technologies_tech_id_seq" INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START WITH 1 CACHE 1),
+	"name" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
@@ -60,7 +75,9 @@ CREATE TABLE "verification" (
 );
 --> statement-breakpoint
 ALTER TABLE "account" ADD CONSTRAINT "account_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "profiles" ADD CONSTRAINT "profiles_auth_id_user_id_fk" FOREIGN KEY ("auth_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "profile_technologies" ADD CONSTRAINT "profile_technologies_profile_id_profiles_profile_id_fk" FOREIGN KEY ("profile_id") REFERENCES "public"."profiles"("profile_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "profile_technologies" ADD CONSTRAINT "profile_technologies_tech_id_technologies_tech_id_fk" FOREIGN KEY ("tech_id") REFERENCES "public"."technologies"("tech_id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "profiles" ADD CONSTRAINT "profiles_profile_id_user_id_fk" FOREIGN KEY ("profile_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "session" ADD CONSTRAINT "session_user_id_user_id_fk" FOREIGN KEY ("user_id") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 CREATE INDEX "account_userId_idx" ON "account" USING btree ("user_id");--> statement-breakpoint
 CREATE INDEX "session_userId_idx" ON "session" USING btree ("user_id");--> statement-breakpoint

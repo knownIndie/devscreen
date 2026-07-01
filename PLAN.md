@@ -12,23 +12,23 @@ selection behavior, synchronization, or evaluation.
 - Phase 2 was started early with an initial `domains` table.
 - Phases 3 through 9 have not started.
 
-# Phase 0: Verify the foundation
+# Phase 0: Verify the foundation ✅ 
 
 Goal: establish a clean baseline before adding product behavior.
 
 ## Tasks
 
 - [x] Inspect all current uncommitted changes.
-- [ ] Decide which homepage and database changes should remain.
-- [ ] Remove or resolve commented-out experimental homepage code.
-- [ ] Fix every lint error.
-- [ ] Fix every TypeScript error.
-- [ ] Produce a successful production build.
-- [ ] Trace Google sign-in from the UI to Better Auth and back.
-- [ ] Verify a first-time login creates one application profile.
-- [ ] Verify a returning login does not create a duplicate profile.
-- [ ] Verify sign-out returns to a signed-out state.
-- [ ] Document the manual authentication test performed.
+- [x] Decide which homepage and database changes should remain.
+- [x] Remove or resolve commented-out experimental homepage code.
+- [x] Fix every lint error.
+- [x] Fix every TypeScript error.
+- [x] Produce a successful production build.
+- [x] Trace Google sign-in from the UI to Better Auth and back.
+- [x] Verify a first-time login creates one application profile.
+- [x] Verify a returning login does not create a duplicate profile.
+- [x] Verify sign-out returns to a signed-out state.
+- [x] Document the manual authentication test performed.
 
 ## Acceptance checks
 
@@ -48,16 +48,14 @@ Goal: persist the minimum user context needed for later personalization.
 
 Current status:
 
-- The generated internal profile ID has been replaced with the Better Auth user
-  identity as the profile key.
-- Technology and profile-technology schemas are being implemented.
-- Phase acceptance has not been verified.
+- [x] The generated internal profile ID has been replaced with the Better Auth user identity as the profile key.
+- [x] Technology and profile-technology schemas are being implemented.
 
 ## Schema tasks
 
 - [ ] Choose and document the exact experience-level values.
 - [x] Use the Better Auth user ID as the profile primary and foreign key.
-- [ ] Rename the profile key consistently to `userId`.
+- [x] Rename the profile key consistently to `userId`.
 - [ ] Remove duplicated username and email from the application profile.
 - [ ] Remove obsolete course and semester fields.
 - [ ] Add `experienceLevel`.

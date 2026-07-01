@@ -1,5 +1,5 @@
 {
-  "id": "d92464f7-458f-4561-a0f5-4ec8dd368617",
+  "id": "b02df77d-2389-477a-9568-1ef1f4a0643f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -122,18 +122,18 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.profiles": {
-      "name": "profiles",
+    "public.domains": {
+      "name": "domains",
       "schema": "",
       "columns": {
-        "id": {
-          "name": "id",
+        "domain_id": {
+          "name": "domain_id",
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
           "identity": {
             "type": "always",
-            "name": "profiles_id_seq",
+            "name": "domains_domain_id_seq",
             "schema": "public",
             "increment": "1",
             "startWith": "1",
@@ -143,10 +143,78 @@
             "cycle": false
           }
         },
-        "auth_id": {
-          "name": "auth_id",
+        "name": {
+          "name": "name",
           "type": "text",
           "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.profile_technologies": {
+      "name": "profile_technologies",
+      "schema": "",
+      "columns": {
+        "profile_id": {
+          "name": "profile_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tech_id": {
+          "name": "tech_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profile_technologies_profile_id_profiles_profile_id_fk": {
+          "name": "profile_technologies_profile_id_profiles_profile_id_fk",
+          "tableFrom": "profile_technologies",
+          "tableTo": "profiles",
+          "columnsFrom": ["profile_id"],
+          "columnsTo": ["profile_id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "profile_technologies_tech_id_technologies_tech_id_fk": {
+          "name": "profile_technologies_tech_id_technologies_tech_id_fk",
+          "tableFrom": "profile_technologies",
+          "tableTo": "technologies",
+          "columnsFrom": ["tech_id"],
+          "columnsTo": ["tech_id"],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "profile_technologies_profile_id_tech_id_pk": {
+          "name": "profile_technologies_profile_id_tech_id_pk",
+          "columns": ["profile_id", "tech_id"]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.profiles": {
+      "name": "profiles",
+      "schema": "",
+      "columns": {
+        "profile_id": {
+          "name": "profile_id",
+          "type": "text",
+          "primaryKey": true,
           "notNull": true
         },
         "username": {
@@ -163,7 +231,7 @@
         },
         "course": {
           "name": "course",
-          "type": "varchar(20)",
+          "type": "text",
           "primaryKey": false,
           "notNull": false
         },
@@ -179,8 +247,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "onboardingCompleted": {
-          "name": "onboardingCompleted",
+        "onboarding_completed": {
+          "name": "onboarding_completed",
           "type": "boolean",
           "primaryKey": false,
           "notNull": false,
@@ -192,28 +260,28 @@
           "primaryKey": false,
           "notNull": true,
           "default": "now()"
+        },
+        "experience_level": {
+          "name": "experience_level",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         }
       },
       "indexes": {},
       "foreignKeys": {
-        "profiles_auth_id_user_id_fk": {
-          "name": "profiles_auth_id_user_id_fk",
+        "profiles_profile_id_user_id_fk": {
+          "name": "profiles_profile_id_user_id_fk",
           "tableFrom": "profiles",
           "tableTo": "user",
-          "columnsFrom": ["auth_id"],
+          "columnsFrom": ["profile_id"],
           "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "profiles_auth_id_unique": {
-          "name": "profiles_auth_id_unique",
-          "nullsNotDistinct": false,
-          "columns": ["auth_id"]
-        }
-      },
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false
@@ -308,6 +376,42 @@
           "columns": ["token"]
         }
       },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.technologies": {
+      "name": "technologies",
+      "schema": "",
+      "columns": {
+        "tech_id": {
+          "name": "tech_id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "technologies_tech_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
       "policies": {},
       "checkConstraints": {},
       "isRLSEnabled": false

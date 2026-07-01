@@ -1,1 +1,0 @@
-ALTER TABLE "profiles" ALTER COLUMN "course" SET DATA TYPE text;
