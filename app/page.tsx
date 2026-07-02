@@ -4,7 +4,7 @@ import Homepage from "@/components/pages/homepage";
 
 export default function page() {
   return (
-    <main className="mx-auto relative w-auto min-h-screen max-w-7xl">
+    <main className="relative flex flex-1">
       <Homepage />
     </main>
   );

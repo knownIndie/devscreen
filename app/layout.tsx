@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import Navbar from "@/components/essential/navbar";
 import ThemeProvider from "@/components/provider/theme-provider";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +56,7 @@ export default function RootLayout({
         jetbrainsMonoHeading.variable,
       )}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="flex min-h-full flex-col">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -63,7 +64,10 @@ export default function RootLayout({
           // disableTransitionOnChange
         >
           <Navbar />
-          {children}
+          <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col px-4">
+            {children}
+          </div>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

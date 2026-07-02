@@ -7,12 +7,12 @@ selection behavior, synchronization, or evaluation.
 
 ## Current progress
 
-- Phase 0 is not verified.
+- Phase 0 is in progress: lint and build pass, but authentication acceptance checks are not verified.
 - Phase 1 is in progress.
 - Phase 2 was started early with an initial `domains` table.
 - Phases 3 through 9 have not started.
 
-# Phase 0: Verify the foundation ✅ 
+# Phase 0: Verify the foundation 🚧
 
 Goal: establish a clean baseline before adding product behavior.
 
@@ -32,8 +32,8 @@ Goal: establish a clean baseline before adding product behavior.
 
 ## Acceptance checks
 
-- [ ] `pnpm lint` passes.
-- [ ] `pnpm build` passes.
+- [x] `pnpm lint` passes.
+- [x] `pnpm build` passes.
 - [ ] Google sign-in works.
 - [ ] Google sign-out works.
 - [ ] A new user creates exactly one profile.
@@ -55,27 +55,36 @@ Current status:
 
 - [ ] Choose and document the exact experience-level values.
 - [x] Use the Better Auth user ID as the profile primary and foreign key.
-- [x] Rename the profile key consistently to `userId`.
+- [ ] Rename the profile key consistently to `userId`.
 - [ ] Remove duplicated username and email from the application profile.
 - [ ] Remove obsolete course and semester fields.
-- [ ] Add `experienceLevel`.
+- [x] Add `experienceLevel`.
 - [ ] Add optional `about`.
 - [ ] Add optional `otherTechnologies`.
-- [ ] Keep `onboardingCompleted` for the MVP.
+- [x] Keep `onboardingCompleted` for the MVP.
 - [ ] Add `updatedAt`.
-- [ ] Add the `technologies` table.
+- [x] Add the `technologies` table.
 - [ ] Add a unique constraint on technology name.
-- [ ] Add the `profileTechnologies` join table.
+- [x] Add the `profileTechnologies` join table.
 - [ ] Make both join-table foreign keys non-null.
 - [ ] Add composite primary key `(userId, technologyId)`.
 - [ ] Generate and inspect the migration.
 - [ ] Apply the migration locally.
 
+## Form Fields
+
+- [x] username : text
+- [x] email
+- [x] course
+- [x] smester :integer
+- [x] bio
+- [x] experience level: text
+
 ## Data and form tasks
 
 - [ ] Seed a curated technology list.
-- [ ] Define the onboarding Zod schema before building submission logic.
-- [ ] Build the experience-level input.
+- [x] Define the onboarding Zod schema before building submission logic.
+- [x] Build the experience-level input.
 - [ ] Build searchable technology multi-select.
 - [ ] Render selected technologies as removable values.
 - [ ] Build the Other technologies input.
